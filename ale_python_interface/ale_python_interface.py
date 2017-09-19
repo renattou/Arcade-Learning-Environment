@@ -34,7 +34,7 @@ ale_lib.setFloat.argtypes = [c_void_p, c_char_p, c_float]
 ale_lib.setFloat.restype = None
 ale_lib.loadROM.argtypes = [c_void_p, c_char_p]
 ale_lib.loadROM.restype = None
-ale_lib.act.argtypes = [c_void_p, c_int]
+ale_lib.act.argtypes = [c_void_p, c_int, c_int]
 ale_lib.act.restype = c_int
 ale_lib.game_over.argtypes = [c_void_p]
 ale_lib.game_over.restype = c_bool
@@ -137,8 +137,8 @@ class ALEInterface(object):
     def loadROM(self, rom_file):
         ale_lib.loadROM(self.obj, rom_file)
 
-    def act(self, action):
-        return ale_lib.act(self.obj, int(action))
+    def act(self, player_a_action, player_b_action=18):
+        return ale_lib.act(self.obj, int(player_a_action), int(player_b_action))
 
     def game_over(self):
         return ale_lib.game_over(self.obj)
